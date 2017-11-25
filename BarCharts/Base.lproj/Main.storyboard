@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,58 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BarCharts" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4d-DG-aY0" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="20" y="33" width="374" height="637"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oMd-ho-Tq0" customClass="ScatterChartView" customModule="Charts" colorLabel="IBBuiltInLabel-Red">
+                                <rect key="frame" x="20" y="33" width="374" height="637"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Zk0-fO-cyg">
+                                <rect key="frame" x="12" y="688" width="390" height="29"/>
+                                <segments>
+                                    <segment title="M15"/>
+                                    <segment title="H1"/>
+                                    <segment title="H4"/>
+                                    <segment title="D1"/>
+                                    <segment title="Aggregate"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onSegmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="YWJ-lQ-aIE"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="u4d-DG-aY0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="JsG-LI-tq5"/>
+                            <constraint firstItem="oMd-ho-Tq0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="13" id="JvK-hY-cl3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oMd-ho-Tq0" secondAttribute="trailing" constant="20" id="RXT-AU-iZ6"/>
+                            <constraint firstItem="Zk0-fO-cyg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="STP-On-Mi9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="u4d-DG-aY0" secondAttribute="trailing" constant="20" id="T67-n8-IdN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zk0-fO-cyg" secondAttribute="trailing" constant="12" id="VgS-Ve-Y5z"/>
+                            <constraint firstItem="Zk0-fO-cyg" firstAttribute="top" secondItem="u4d-DG-aY0" secondAttribute="bottom" constant="18" id="Zip-m8-UmR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Zk0-fO-cyg" secondAttribute="bottom" constant="20" id="hHn-kF-JlJ"/>
+                            <constraint firstItem="u4d-DG-aY0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="13" id="jIj-gJ-zNa"/>
+                            <constraint firstItem="oMd-ho-Tq0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="lIW-Yi-Txg"/>
+                            <constraint firstItem="Zk0-fO-cyg" firstAttribute="top" secondItem="oMd-ho-Tq0" secondAttribute="bottom" constant="18" id="mGV-H7-zWD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="chartView" destination="u4d-DG-aY0" id="5QN-QI-6jS"/>
+                        <outlet property="dotsChart" destination="oMd-ho-Tq0" id="Zcd-Sx-hV0"/>
+                        <outlet property="segmentController" destination="Zk0-fO-cyg" id="ejX-A8-Aud"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-18.840579710144929" y="44.021739130434788"/>
         </scene>
     </scenes>
 </document>
